@@ -1,3 +1,4 @@
+const imgcat = require('imgcat')
 const nightmare = require('nightmare')({ show: true })
 
 require('dotenv').config()
@@ -39,7 +40,29 @@ function scrapePage(url) {
 
         return items
       })
-      .then(console.log) // eslint-disable-line no-console
+      .then(items => {
+        items.forEach(item => {
+          imgcat(item.img)
+            .then(image => {
+              console.log(item.name)
+              console.log(image)
+              console.log(item.price.replace(' ', ' (') + ')')
+              console.log(`https://www.modcloth.com${item.href}`)
+              console.log('')
+              console.log('*** *** *** *** *** *** *** *** ***')
+              console.log('')
+            })
+            .catch(() => {
+              console.log(item.name)
+              console.log('(image error)')
+              console.log(item.price.replace(' ', ' (') + ')')
+              console.log(`https://www.modcloth.com${item.href}`)
+              console.log('')
+              console.log('*** *** *** *** *** *** *** *** ***')
+              console.log('')
+            })
+        })
+      })
       .then(() => nightmare.use(nextPage()))
   }
 }
