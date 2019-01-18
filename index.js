@@ -1,5 +1,5 @@
 const imgcat = require('imgcat')
-const nightmare = require('nightmare')({ show: true })
+const nightmare = require('nightmare')({ show: false })
 
 require('dotenv').config()
 
