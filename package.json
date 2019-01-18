@@ -1,0 +1,15 @@
+{
+  "name": "modcloth-scraper",
+  "version": "1.0.0",
+  "description": "Scrape modcloth loved list and get items on sale that are not out of stock",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "katy lavallee",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "nightmare": "^3.0.1"
+  }
+}
