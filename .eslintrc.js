@@ -37,6 +37,7 @@ module.exports = {
             "error",
             "always-multiline"
         ],
+        "no-console": "off",
         "no-trailing-spaces": [
             "error"
         ],
