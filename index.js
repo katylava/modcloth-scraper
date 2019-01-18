@@ -3,7 +3,7 @@ const nightmare = require('nightmare')({ show: true })
 require('dotenv').config()
 
 
-function nextPage(url) {
+function scrapePage(url) {
   return function(nightmare) {
     if (!url) {
       return nightmare.end()
@@ -40,20 +40,24 @@ function nextPage(url) {
         return items
       })
       .then(console.log) // eslint-disable-line no-console
-      .then(() => {
-        return nightmare
-          .evaluate(() => {
-            const nextLink = document.querySelector('a.page-next')
-            let url = nextLink.getAttribute('href')
+      .then(() => nightmare.use(nextPage()))
+  }
+}
 
-            if (nextLink.parentNode.getAttribute('class').indexOf('disabled') !== -1) {
-              url = null
-            }
+function nextPage() {
+  return function(nightmare) {
+    nightmare
+      .evaluate(() => {
+        const nextLink = document.querySelector('a.page-next')
+        let url = nextLink.getAttribute('href')
 
-            return url
-          })
+        if (nextLink.parentNode.getAttribute('class').indexOf('disabled') !== -1) {
+          url = null
+        }
+
+        return url
       })
-      .then(nextPage)
+      .then(url => nightmare.use(scrapePage(url)))
   }
 }
 
@@ -65,4 +69,4 @@ nightmare
   .type('#dwfrm_login_password', process.env.MODCLOTH_PASSWORD)
   .click('button[name="dwfrm_login_login"]')
   .wait('ul.customer-registered')
-  .use(nextPage('https://www.modcloth.com/account/lovelist'))
+  .use(scrapePage('https://www.modcloth.com/account/lovelist'))
