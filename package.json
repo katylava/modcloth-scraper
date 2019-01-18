@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^6.2.0",
+    "imgcat": "^2.3.0",
     "nightmare": "^3.0.1"
   }
 }
