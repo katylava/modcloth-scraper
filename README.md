@@ -11,3 +11,5 @@ displays in terminal (requires iTerm2 v3+ for images).
 3. `cp sample.env .env` and edit `.env` so it has your Modcloth username and pasword
 4. `npm install`
 5. `node index.js`
+6. Wait patiently (it takes a bit to log in and navigate to the loved list page
+   before it starts showing output)
